@@ -20,21 +20,21 @@ D:\autotest\test_home\global</br>
 D:\autotest\test_home\log</br>
 * <文件></br>
 D:\autotest\test_home\global\TestSuit.xml</br>
-<pre>
+```xml
 <testsuit>
 	<testmodule id="自动化测试" path="D:\autotest\测试用例.xls" executor="com.autotest.webserivce.executor.WebAPITestExecutor">
 		<testsheet id="region1" testclass="AutotestSample.TestRegion1"/>
 		<testsheet id="region2" testclass="AutotestSample.TestRegion2"/>
 	</testmodule>
 </testsuit>
-</pre>
+```
 ## 2.4 测试用例
 ### 2.4.1 描述型用例
 描述测试用例保存到Excel，通过框架对数据进行读取，并执行对应方法，回写测试结	果，输入日志、报告等，也可扩展其他存储方式。Sheet名称与用例测试类对应关系，	以及路径等信息都在TestSuit.xml内配置。用例表头必须为Excel的第一行。具体模板	见AutotestSample/src/main/resources目录。</br>
 ![follow](https://github.com/skyVea/AutoTestFrame/blob/master/Img/excelcase.png)
 ### 2.4.2 代码用例
 具体模板见AutotestSample组件。</br>
-<pre>
+```java
 public class TestRegion1 {
 
 	public Object testCase1(WebAPITestCase testCase) {
@@ -53,7 +53,7 @@ public class TestRegion1 {
 		return testCase;
 	}
 }
-</pre>
+```
 ## 2.5 执行及结果
 开始执行TestExecutor.getInstance().execute();
 执行结果会被回写到描述测试用例内。测试日志与测试报告在TEST_HOME下查看。
@@ -65,7 +65,7 @@ public class TestRegion1 {
 想要做扩展也可以。如SeleniumUI自动化等。用例转换与执行需要继承BaseTestExecutor与TestCaseAdapter；用例Model需要继承BaseTestCase。也可以重写各种监听器如报告监听器。具体实现方式见com.autotest.webserivce组件代码详情。
 ### 2.6.1 用例Model
 用例Model配置注解需与表头一致。如：
-<pre>
+```java
 public class WebAPITestCase extends BaseTestCase {
 	@Column(columName = "用例编码", isPrimary = true, isIncrement = true)
 	String code;
@@ -87,5 +87,6 @@ public class WebAPITestCase extends BaseTestCase {
 	Integer result;
 	@Column(columName = "备注")
 	String comment;
-  </pre>
+}
+```
  # 联系方式88603221@qq.com

@@ -15,12 +15,12 @@
 ![img](https://github.com/skyVea/AutoTestFrame/blob/master/Img/env.png)
 ### 2.3.2 TEST_HOME测试目录说明
 
-* <文件夹>
-全局配置目录（未启用）：D:\autotest\test_home\global
-日志目录：D:\autotest\test_home\log
-Excel测试结果目录：D:\autotest\test_home\excel
-* <文件>
-测试报告：D:\autotest\test_home\Extent.html
+* <文件夹></br>
+全局配置目录（未启用）：D:\autotest\test_home\global</br>
+日志目录：D:\autotest\test_home\log</br>
+Excel测试结果目录：D:\autotest\test_home\excel</br>
+* <文件></br>
+测试报告：D:\autotest\test_home\Extent.html</br>
 
 ## 2.4 测试用例
 ### 2.4.1 描述型用例
@@ -65,7 +65,7 @@ public class TestRegion1 {
 ```
 ## 2.5 执行及结果
 开始执行TestExecutor.getInstance().execute();
-执行结果会被回写到描述测试用例内。测试日志与测试报告在TEST_HOME下查看。
+执行结果、测试日志与测试报告在TEST_HOME下查看。
 * 日志：</br>
 ![img](https://github.com/skyVea/AutoTestFrame/blob/master/Img/log.png)
 * 报告：</br>
@@ -109,4 +109,5 @@ public class WebAPITestCase extends BaseTestCase {
 ![img](https://github.com/skyVea/AutoTestFrame/blob/master/Img/build.png)
 ## 3.5 工作空间查看测试结果目录test_home
 ![img](https://github.com/skyVea/AutoTestFrame/blob/master/Img/workspace.png)
- # 联系方式88603221@qq.com
+---
+ #### 有问题请联系88603221@qq.com

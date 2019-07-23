@@ -1,8 +1,0 @@
-﻿<testsuit>
-	<testmodule id="自动化测试" path="D:\autotest\测试用例.xls" executor="com.autotest.webserivce.executor.WebAPITestExecutor">
-		<testsheet id="region1" testclass="AutotestSample.TestRegion1"/>
-		<testsheet id="region2" testclass="AutotestSample.TestRegion2"/>
-	</testmodule>
-</testsuit>
-
-

@@ -11,7 +11,7 @@
 框架分为三层。第一层为核心组件层，主要负责调用数据接口com.autotest.adatper.TestCaseAdapter，调用用例执行接口com.autotest.executor.BaseTestExecutor，提供了默认测试过程监听器，与注册自定监听器的接口。提供了解析全局配置，维护全局变量，提供一些工具类以及默认测试报告监听器，测试日志等；第二层测试对象层，这个层不是具体的测试用例层。而是将一类用例或一类测试内容，抽象出来。比如：UI测试、Http接口测试等。需要实现核心组件提供的两个接口，与用例Modle对象，根据需要实现监听器；第三层是用例层，包含了，配置文件，描述用例，具体的测试用例类和方法等。
 ## 2.3 配置目录
 ### 2.3.1 设置环境变量TEST_HOME
-此目录用于存放日志、测试报告、测试结果等。目录与内容都会自动生成。指定测试目	录环境变量如下。</br>
+此目录用于存放日志、测试报告、测试结果等。目录结构会自动生成。数据源配置datasource.xml需要手动配置。指定测试目录环境变量如下。</br>
 ![img](https://github.com/skyVea/AutoTestFrame/blob/master/Img/env.png)
 ### 2.3.2 TEST_HOME测试目录说明
 
@@ -21,6 +21,44 @@
 Excel测试结果目录：D:\autotest\test_home\excel</br>
 * <文件></br>
 测试报告：D:\autotest\test_home\Extent.html</br>
+数据库配置：D:\autotest\test_home\global\datasources.xml</br>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources> 
+  <datasource id="test1" enabled="true" dbType="ORACLE" connectType="0"> 
+    <driverClassName>oracle.jdbc.OracleDriver</driverClassName>  
+    <url><![CDATA[jdbc:oracle:thin:@192.168.1.8:1521:ora]]></url>  
+    <username>user1</username>  
+    <password>123456</password>
+    <poolProperties> 
+      <minPoolSize>0</minPoolSize>  
+      <maxPoolSize>600</maxPoolSize>  
+      <maxIdleTime>60</maxIdleTime>  
+      <acquisitionTimeout>60</acquisitionTimeout>  
+     <shareTransactionConnections>false</shareTransactionConnections>  
+      <acquireIncrement>2</acquireIncrement>  
+      <deferConnectionRelease>true</deferConnectionRelease>  
+      <testQuery>SELECT 1 FROM DUAL</testQuery> 
+    </poolProperties> 
+  </datasource>  
+  <datasource id="test2" enabled="true" dbType="ORACLE" connectType="0"> 
+    <driverClassName>oracle.jdbc.OracleDriver</driverClassName>  
+    <url><![CDATA[jdbc:oracle:thin:@192.168.1.8:1521:ora]]></url>  
+    <username>user2</username>  
+    <password>123456</password>  
+    <poolProperties> 
+      <minPoolSize>0</minPoolSize>  
+      <maxPoolSize>600</maxPoolSize>  
+      <maxIdleTime>60</maxIdleTime>  
+      <acquisitionTimeout>60</acquisitionTimeout>  
+     <shareTransactionConnections>false</shareTransactionConnections>  
+      <acquireIncrement>2</acquireIncrement>  
+      <deferConnectionRelease>true</deferConnectionRelease>  
+      <testQuery>SELECT 1 FROM DUAL</testQuery> 
+    </poolProperties> 
+  </datasource> 
+</datasources>
+```
 
 ## 2.4 测试用例
 ### 2.4.1 描述型用例
@@ -97,6 +135,10 @@ public class WebAPITestCase extends BaseTestCase {
 	@Column(columName = "备注")
 	String comment;
 }
+```
+### 2.6.2操作数据库示例
+```java
+HibernateDaoFactory.getInstance().getDao("数据源ID").execute(sql);
 ```
 # 3 Jenkins集成测试框架使用
 ## 3.1 构建一个Maven项目

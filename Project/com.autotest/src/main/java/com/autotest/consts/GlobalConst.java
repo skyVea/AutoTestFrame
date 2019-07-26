@@ -15,6 +15,8 @@ public class GlobalConst {
 	public static final String TEST_HOME = System.getenv().get("TEST_HOME");
 	// GLOBAL
 	public final static String TESTGLOBAL = TEST_HOME + File.separator + "global";
+	// 数据源配置文件
+	public final static String DSCONFIG = TEST_HOME + File.separator + "global" + File.separator + "datasources.xml";
 	// TESTSUIT
 	public final static String TESTSUIT = PathUtil.getPath("/TestSuit.xml");
 	// 日志持久化路径
@@ -23,6 +25,5 @@ public class GlobalConst {
 	public final static String TESTRESULT_EXCEL = TEST_HOME + File.separator + "excel";
 	// 测试报告路径
 	public final static String TESTREPORT = TEST_HOME;
-
 
 }

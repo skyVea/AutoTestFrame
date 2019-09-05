@@ -2,12 +2,13 @@ package com.autotest.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.LockOptions;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate5.HibernateCallback;
-import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.hibernate.Transaction;
 
 public class HibernateDao implements Dao {
 	private HibernateTemplate hibernateTemplate = null;
@@ -45,16 +46,27 @@ public class HibernateDao implements Dao {
 		vo = this.hibernateTemplate.get(clazz, id);
 		return vo;
 	}
-
-	public List execute(String sql) {
-		List list = this.hibernateTemplate.execute(new HibernateCallback<List>() {
-			@Override
-			public List doInHibernate(Session session) throws HibernateException {
-				SQLQuery query = session.createSQLQuery(sql);
-				return query.list();
-			}
+	
+	public List<Object> findAll(Class<?> clazz){
+		return this.hibernateTemplate.executeWithNativeSession(session -> {
+			return this.hibernateTemplate.protectSession(protectsession -> {
+				List listtemp = null;
+				Criteria criteria = protectsession.createCriteria(clazz);
+				listtemp = criteria.list();
+				return listtemp;
+			}, session);
 		});
-		return list;
+	}
+	
+	public List execute(String sql) {
+		return this.hibernateTemplate.executeWithNativeSession(session -> {
+			return this.hibernateTemplate.protectSession(protectsession -> {
+				List listtemp = null;
+				SQLQuery query = protectsession.createSQLQuery(sql);
+				listtemp = query.list();
+				return listtemp;
+			}, session);
+		});
 	}
 
 	public SessionFactory getSessionFactory() {

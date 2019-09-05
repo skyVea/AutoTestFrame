@@ -37,4 +37,5 @@ public class HibernateDaoFactory {
 		return null;
 	}
 
+
 }
